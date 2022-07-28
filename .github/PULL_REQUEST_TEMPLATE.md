@@ -1,4 +1,5 @@
-##### SUMMARY
+## SUMMARY
+
 <!--- Describe the change, including rationale and design decisions -->
 
 <!---
@@ -7,7 +8,7 @@ commit message and your description; but you should still explain what
 the change does.
 -->
 
-##### TESTS/SPECS
+## TESTS/SPECS
 
 <!---
 Pull Requests require passing Travis CI tests.
