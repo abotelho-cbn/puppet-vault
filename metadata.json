@@ -31,50 +31,37 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "Ubuntu",
+      "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "14.04",
-        "16.04",
-        "18.04"
+        "7",
+        "8"
       ]
     },
     {
-      "operatingsystem": "Debian",
+      "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "8",
-        "9"
+        "8"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6.0",
-        "7.0"
+        "8"
       ]
     },
     {
-      "operatingsystem": "CentOS",
+      "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "6.0",
-        "7.0"
+        "10"
       ]
     },
     {
-      "operatingsystem": "Amazon",
+      "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "2016.03"
+        "18.04",
+        "20.04",
+        "22.04"
       ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "25",
-        "26",
-        "27"
-      ]
-    },
-    {
-      "operatingsystem": "Archlinux"
     }
   ],
   "requirements": [
