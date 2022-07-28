@@ -4,16 +4,16 @@
 
 # puppet-vault
 
-Puppet module to install and run [Hashicorp Vault](https://vaultproject.io).
+Puppet module to install and run [HashiCorp Vault](https://vaultproject.io).
 
 ## Support
 
 This module is currently only tested on:
 
-* Ubuntu 16.04
 * Ubuntu 18.04
-* CentOS/RedHat 6
+* Ubuntu 20.04
 * CentOS/RedHat 7
+* CentOS/RedHat 8
 
 ## Usage
 
@@ -22,48 +22,30 @@ include vault
 ```
 
 By default, with no parameters the module will configure vault with some sensible defaults to get you running, the following parameters may be specified to configure Vault.
-Please see [The official documentation](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
+Please see [the official documentation](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
 
 ## Parameters
 
 ### Setup parameters
 
 * `user`: Customise the user vault runs as, will also create the user unless `manage_user` is false.
-
 * `manage_user`: Whether or not the module should create the user.
-
 * `group`: Customise the group vault runs as, will also create the user unless `manage_group` is false.
-
 * `manage_group`: Whether or not the module should create the group.
-
 * `bin_dir`: Directory the vault executable will be installed in.
-
 * `config_dir`: Directory the vault configuration will be kept in.
-
 * `config_mode`: Mode of the configuration file (config.json). Defaults to '0750'
-
 * `purge_config_dir`: Whether the `config_dir` should be purged before installing the generated config.
-
 * `install_method`: Supports the values `repo` or `archive`. See [Installation parameters](#installation-parameters).
-
 * `service_name`: Customise the name of the system service
-
 * `service_enable`: Tell the OS to enable or disable the service at system startup
-
 * `service_ensure`: Tell the OS whether the service should be running or stopped
-
 * `service_provider`: Customise the name of the system service provider; this also controls the init configuration files that are installed.
-
 * `service_type`: Choose between `server` or `agent` for which mode you want the Vault binary to run as.
-
 * `service_options`: Extra argument to pass to `vault`, e.g., `vault server --help` or `vault agent --help`
-
-* `num_procs`: Sets the `GOMAXPROCS` environment variable, to determine how many CPUs Vault can use. The official Vault Terraform install.sh script sets this to the output of ``nprocs``, with the comment, "Make sure to use all our CPUs, because Vault can block a scheduler thread". Default: number of CPUs on the system, retrieved from the ``processorcount`` fact.
-
+* `num_procs`: Sets the `GOMAXPROCS` environment variable, to determine how many CPUs Vault can use. The official Vault Terraform install.sh script sets this to the output of `nprocs`, with the comment, "Make sure to use all our CPUs, because Vault can block a scheduler thread". Default: number of CPUs on the system, retrieved from the `processorcount` fact.
 * `manage_storage_dir`: When using the file storage, this boolean determines whether or not the path (as specified in the `['file']['path']` section of the storage config) is created, and the owner and group set to the vault user.  Default: `false`
-
 * `manage_service_file`: Manages the service file regardless of the defaults. Default: See [Installation parameters](#installation-parameters).
-
 * `manage_config_file`: Manages the configuration file. When set to false, `config.json` will not be generated. `manag_storage_dir` is ignored. Default: `true`
 
 ### Installation parameters
@@ -98,39 +80,31 @@ The module will **not** manage any required packages to un-archive, e.g. `unzip`
 By default, with no parameters the module will configure vault with some sensible defaults to get you running, the following parameters may be specified to configure Vault.  Please see [The official documentation](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
 
 * `storage`: A hash containing the Vault storage configuration. File and raft storage backends are supported. In the examples section you can find an example for raft. The file backend is the default:
-```
-{ 'file' => { 'path' => '/var/lib/vault' }}
-```
+
+    ```puppet
+    { 'file' => { 'path' => '/var/lib/vault' } }
+    ```
 
 * `listener`: A hash or array of hashes containing the listener configuration(s), default:
 
-```
-{
-  'tcp' => {
-    'address'     => '127.0.0.1:8200',
-    'tls_disable' => 1,
-  }
-}
-```
+    ```puppet
+    {
+      'tcp' => {
+        'address'     => '127.0.0.1:8200',
+        'tls_disable' => 1,
+      }
+    }
+    ```
 
 * `ha_storage`: An optional hash containing the `ha_storage` configuration
-
 * `seal`: An optional hash containing the `seal` configuration
-
 * `telemetry`: An optional hash containing the `telemetry` configuration
-
 * `disable_cache`: A boolean to disable or enable the cache (default: `undef`)
-
 * `disable_mlock`: A boolean to disable or enable mlock [See below](#mlock) (default: `undef`)
-
 * `default_lease_ttl`: A string containing the default lease TTL (default: `undef`)
-
 * `max_lease_ttl`: A string containing the max lease TTL (default: `undef`)
-
 * `enable_ui`: Enable the vault UI (requires vault 0.10.0+ or Enterprise) (default: `undef`)
-
 * `api_addr`: Specifies the address (full URL) to advertise to other Vault servers in the cluster for client redirection. This value is also used for plugin backends. This can also be provided via the environment variable VAULT_API_ADDR. In general this should be set as a full URL that points to the value of the listener address (default: `undef`)
-
 * `extra_config`: A hash containing extra configuration, intended for newly released configuration not yet supported by the module. This hash will get merged with other configuration attributes into the JSON config file.
 
 ## Examples
@@ -177,6 +151,7 @@ vault::default_lease_ttl: 720h
 ```
 
 Configuring raft storage engine using Hiera:
+
 ```yaml
 vault::storage:
   raft:
@@ -188,7 +163,7 @@ vault::storage:
     - leader_api_addr: https://vault3:8200
 ```
 
-## mlock
+## `mlock`
 
 By default vault will use the `mlock` system call, therefore the executable will need the corresponding capability.
 
@@ -205,14 +180,16 @@ class { '::vault':
 
 ## Testing
 
-First, ``bundle install``
+If you’re using PDK, run every test with `pdk validate`
 
-To run RSpec unit tests: ``bundle exec rake spec``
+First, `bundle install`
 
-To run RSpec unit tests, puppet-lint, syntax checks and metadata lint: ``bundle exec rake test``
+To run RSpec unit tests: `bundle exec rake spec`
 
-To run Beaker acceptance tests: ``BEAKER_set=<nodeset name> BEAKER_PUPPET_COLLECTION=puppet5 bundle exec rake acceptance``
-where ``<nodeset name>`` is one of the filenames in ``spec/acceptance/nodesets`` without the trailing ``.yml``,
+To run RSpec unit tests, puppet-lint, syntax checks and metadata lint: `bundle exec rake test`
+
+To run Beaker acceptance tests: `BEAKER_set=<nodeset name> BEAKER_PUPPET_COLLECTION=puppet5 bundle exec rake acceptance`
+where `<nodeset name>` is one of the filenames in `spec/acceptance/nodesets` without the trailing `.yml`,
 e.g. `ubuntu-18.04-x86_64-docker`.
 
 ## Related Projects
