@@ -200,6 +200,7 @@ describe 'vault' do
           end
         end
 
+        # rubocop:disable RSpec/EmptyExampleGroup
         context 'When asked not to manage the repo' do
           let(:params) do
             {
@@ -246,6 +247,7 @@ describe 'vault' do
             it { is_expected.to contain_yumrepo('HashiCorp') }
           end
         end
+        # rubocop:enable RSpec/EmptyExampleGroup
 
         context 'when installed from package repository' do
           let(:params) do
