@@ -1,4 +1,5 @@
-# == Class vault::service
+# @summary Manage the Vault system service, enabled by default
+#
 class vault::service {
   if $vault::manage_service {
     service { $vault::service_name:

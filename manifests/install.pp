@@ -1,4 +1,4 @@
-# == Class vault::install
+# @summary Install Vault, either from a repository or archive
 #
 class vault::install {
   $vault_bin = "${vault::bin_dir}/vault"

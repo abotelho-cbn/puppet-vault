@@ -1,6 +1,4 @@
-# == Class vault::config
-#
-# This class is called from vault for service config.
+# @summary Set the Vault config via JSON file & optionally set up a system service
 #
 class vault::config {
   file { $vault::config_dir:
