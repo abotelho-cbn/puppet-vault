@@ -50,12 +50,14 @@ describe 'vault class' do
         it { is_expected.to be_mode 444 }
         it { is_expected.to be_owned_by 'root' }
         it { is_expected.to be_grouped_into 'root' }
-        its(:content) { is_expected.to include 'env VAULT=/usr/local/bin/vault' }
-        its(:content) { is_expected.to include 'env CONFIG=/etc/vault/config.json' }
-        its(:content) { is_expected.to include 'env USER=vault' }
-        its(:content) { is_expected.to include 'env GROUP=vault' }
-        its(:content) { is_expected.to include 'exec start-stop-daemon -u $USER -g $GROUP -p $PID_FILE -x $VAULT -S -- server -config=$CONFIG ' }
-        its(:content) { is_expected.to match %r{export GOMAXPROCS=\${GOMAXPROCS:-\d+}} }
+        its(:content) do
+          is_expected.to include 'env VAULT=/usr/local/bin/vault'
+          is_expected.to include 'env CONFIG=/etc/vault/config.json'
+          is_expected.to include 'env USER=vault'
+          is_expected.to include 'env GROUP=vault'
+          is_expected.to include 'exec start-stop-daemon -u $USER -g $GROUP -p $PID_FILE -x $VAULT -S -- server -config=$CONFIG '
+          is_expected.to match %r{export GOMAXPROCS=\${GOMAXPROCS:-\d+}}
+        end
       end
       describe file('/etc/init.d/vault') do
         it { is_expected.to be_symlink }
@@ -67,10 +69,12 @@ describe 'vault class' do
         it { is_expected.to be_mode 644 }
         it { is_expected.to be_owned_by 'root' }
         it { is_expected.to be_grouped_into 'root' }
-        its(:content) { is_expected.to include 'User=vault' }
-        its(:content) { is_expected.to include 'Group=vault' }
-        its(:content) { is_expected.to include 'ExecStart=/usr/local/bin/vault server -config=/etc/vault/config.json ' }
-        its(:content) { is_expected.to match %r{Environment=GOMAXPROCS=\d+} }
+        its(:content) do
+          is_expected.to include 'User=vault'
+          is_expected.to include 'Group=vault'
+          is_expected.to include 'ExecStart=/usr/local/bin/vault server -config=/etc/vault/config.json '
+          is_expected.to match %r{Environment=GOMAXPROCS=\d+}
+        end
       end
       describe command('systemctl list-units') do
         its(:stdout) { is_expected.to include 'vault.service' }
@@ -82,10 +86,12 @@ describe 'vault class' do
           it { is_expected.to be_mode 755 }
           it { is_expected.to be_owned_by 'root' }
           it { is_expected.to be_grouped_into 'root' }
-          its(:content) { is_expected.to include 'daemon --user vault "{ $exec server -config=$conffile $OPTIONS &>> $logfile & }; echo \$! >| $pidfile"' }
-          its(:content) { is_expected.to include 'conffile="/etc/vault/config.json"' }
-          its(:content) { is_expected.to include 'exec="/usr/local/bin/vault"' }
-          its(:content) { is_expected.to match %r{export GOMAXPROCS=\${GOMAXPROCS:-\d+}} }
+          its(:content) do
+            is_expected.to include 'daemon --user vault "{ $exec server -config=$conffile $OPTIONS &>> $logfile & }; echo \$! >| $pidfile"'
+            is_expected.to include 'conffile="/etc/vault/config.json"'
+            is_expected.to include 'exec="/usr/local/bin/vault"'
+            is_expected.to match %r{export GOMAXPROCS=\${GOMAXPROCS:-\d+}}
+          end
         end
       end
     end
