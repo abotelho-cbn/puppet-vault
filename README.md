@@ -1,6 +1,5 @@
-[![Puppet Forge](https://img.shields.io/puppetforge/v/jsok/vault.svg)](https://forge.puppetlabs.com/jsok/vault)
-[![Puppet Forge Downloads](https://img.shields.io/puppetforge/dt/jsok/vault.svg)](https://forge.puppetlabs.com/jsok/vault)
-[![Build Status](https://travis-ci.org/jsok/puppet-vault.svg?branch=master)](https://travis-ci.org/jsok/puppet-vault)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/jeffbyrnes/vault.svg)](https://forge.puppetlabs.com/jeffbyrnes/vault)
+[![Puppet Forge Downloads](https://img.shields.io/puppetforge/dt/jeffbyrnes/vault.svg)](https://forge.puppetlabs.com/jeffbyrnes/vault)
 
 # puppet-vault
 

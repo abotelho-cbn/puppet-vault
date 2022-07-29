@@ -1,12 +1,12 @@
 {
-  "name": "jsok-vault",
-  "version": "2.3.0",
-  "author": "jsok",
+  "name": "jeffbyrnes-vault",
+  "version": "0.1.0",
+  "author": "athenahealth",
   "summary": "Puppet module to manage Vault (https://vaultproject.io)",
   "license": "Apache-2.0",
-  "source": "https://github.com/jsok/puppet-vault.git",
-  "project_page": "https://github.com/jsok/puppet-vault",
-  "issues_url": "https://github.com/jsok/puppet-vault/issues",
+  "source": "https://github.com/athenahealth/puppet-vault.git",
+  "project_page": "https://github.com/athenahealth/puppet-vault",
+  "issues_url": "https://github.com/athenahealth/puppet-vault/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
