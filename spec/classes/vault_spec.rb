@@ -72,7 +72,7 @@ describe 'vault' do
         }
 
         context 'vault JSON config' do
-          subject { param_value(catalogue, 'File', '/etc/vault/config.json', 'content') }
+          subject(:config) { param_value(catalogue, 'File', '/etc/vault/config.json', 'content') }
 
           it {
             is_expected.to include_json(
@@ -94,7 +94,7 @@ describe 'vault' do
             )
           }
           it 'excludes unconfigured config options' do
-            expect(subject).not_to include_json(
+            expect(config).not_to include_json(
               ha_storage: exist,
               seal: exist,
               disable_cache: exist,
