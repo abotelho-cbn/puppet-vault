@@ -21,8 +21,7 @@ This module is currently only tested on:
 include vault
 ```
 
-By default, with no parameters the module will configure vault with some sensible defaults to get you running, the following parameters may be specified to configure Vault.
-Please see [the official documentation](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
+By default, with no parameters the module will configure Vault with some sensible defaults to get you running. Please see [Vault’s official config docs](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
 
 ## Parameters
 
@@ -63,9 +62,10 @@ When `repo` is set the module will attempt to install a package corresponding wi
 #### When `install_method` is `archive`
 
 When `archive` the module will attempt to download and extract a zip file from the `download_url`, the extracted file will be placed in the `bin_dir` folder.
+
 The module will **not** manage any required packages to un-archive, e.g. `unzip`. See [`puppet-archive` setup](https://github.com/voxpupuli/puppet-archive#setup) documentation for more details.
 
-* `download_url`: Optional manual URL to download the vault zip distribution from.  You can specify a local file on the server with a fully qualified pathname, or use `http`, `https`, `ftp` or `s3` based URI's. default: `undef`
+* `download_url`: Optional manual URL to download the vault zip distribution from.  You can specify a local file on the server with a fully qualified pathname, or use `http`, `https`, `ftp` or `s3` based URIs. default: `undef`
 * `download_url_base`: This is the base URL for the hashicorp releases. If no manual `download_url` is specified, the module will download from hashicorp. default: `https://releases.hashicorp.com/vault/`
 * `download_extension`: The extension of the vault download when using hashicorp releases. default: `zip`
 * `download_dir`: Path to download the zip file to, default: `/tmp`
@@ -77,7 +77,7 @@ The module will **not** manage any required packages to un-archive, e.g. `unzip`
 
 ### Configuration parameters
 
-By default, with no parameters the module will configure vault with some sensible defaults to get you running, the following parameters may be specified to configure Vault.  Please see [The official documentation](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
+By default, with no parameters the module will configure Vault with some sensible defaults to get you running.  Please see [Vault’s official config docs](https://www.vaultproject.io/docs/configuration/index.html) for further details of acceptable parameter values.
 
 * `storage`: A hash containing the Vault storage configuration. File and raft storage backends are supported. In the examples section you can find an example for raft. The file backend is the default:
 
@@ -110,11 +110,11 @@ By default, with no parameters the module will configure vault with some sensibl
 ## Examples
 
 ```puppet
-class { '::vault':
+class { 'vault':
   storage => {
     file => {
       path => '/tmp',
-    }
+    },
   },
   listener => [
     {
@@ -127,15 +127,14 @@ class { '::vault':
       tcp => {
         address => '10.0.0.10:8200',
       }
-    }
+    },
   ]
 }
 ```
 
-or alternatively using Hiera:
+or alternatively, using Hiera:
 
 ```yaml
----
 vault::storage:
   file:
     path: /tmp
@@ -165,16 +164,17 @@ vault::storage:
 
 ## `mlock`
 
-By default vault will use the `mlock` system call, therefore the executable will need the corresponding capability.
+By default Vault will use the `mlock` system call, therefore the executable will need the corresponding capability.
 
 In production, you should only consider setting the `disable_mlock` option on Linux systems that only use encrypted swap or do not use swap at all.
 
 The module will use `setcap` on the vault binary to enable this.
+
 If you do not wish to use `mlock`, set the `disable_mlock` attribute to `true`
 
 ```puppet
-class { '::vault':
-  disable_mlock => true
+class { 'vault':
+  disable_mlock => true,
 }
 ```
 
@@ -194,4 +194,4 @@ e.g. `ubuntu-18.04-x86_64-docker`.
 
 ## Related Projects
 
- * [`hiera-vault`](https://github.com/jsok/hiera-vault): A Hiera storage backend to retrieve secrets from Hashicorp's Vault
+* [`hiera-vault`](https://github.com/jsok/hiera-vault): A Hiera storage backend to retrieve secrets from HashiCorp's Vault
