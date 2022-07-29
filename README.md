@@ -24,27 +24,9 @@ By default, with no parameters the module will configure Vault with some sensibl
 
 ## Parameters
 
-### Setup parameters
+Full documentation of the module’s parameters can be found in [DOCS.md](https://github.com/athenahealth/puppet-vault/blob/main/DOCS.md).
 
-* `user`: Customise the user vault runs as, will also create the user unless `manage_user` is false.
-* `manage_user`: Whether or not the module should create the user.
-* `group`: Customise the group vault runs as, will also create the user unless `manage_group` is false.
-* `manage_group`: Whether or not the module should create the group.
-* `bin_dir`: Directory the vault executable will be installed in.
-* `config_dir`: Directory the vault configuration will be kept in.
-* `config_mode`: Mode of the configuration file (config.json). Defaults to '0750'
-* `purge_config_dir`: Whether the `config_dir` should be purged before installing the generated config.
-* `install_method`: Supports the values `repo` or `archive`. See [Installation parameters](#installation-parameters).
-* `service_name`: Customise the name of the system service
-* `service_enable`: Tell the OS to enable or disable the service at system startup
-* `service_ensure`: Tell the OS whether the service should be running or stopped
-* `service_provider`: Customise the name of the system service provider; this also controls the init configuration files that are installed.
-* `service_type`: Choose between `server` or `agent` for which mode you want the Vault binary to run as.
-* `service_options`: Extra argument to pass to `vault`, e.g., `vault server --help` or `vault agent --help`
-* `num_procs`: Sets the `GOMAXPROCS` environment variable, to determine how many CPUs Vault can use. The official Vault Terraform install.sh script sets this to the output of `nprocs`, with the comment, "Make sure to use all our CPUs, because Vault can block a scheduler thread". Default: number of CPUs on the system, retrieved from the `processorcount` fact.
-* `manage_storage_dir`: When using the file storage, this boolean determines whether or not the path (as specified in the `['file']['path']` section of the storage config) is created, and the owner and group set to the vault user.  Default: `false`
-* `manage_service_file`: Manages the service file regardless of the defaults. Default: See [Installation parameters](#installation-parameters).
-* `manage_config_file`: Manages the configuration file. When set to false, `config.json` will not be generated. `manag_storage_dir` is ignored. Default: `true`
+However, we highlight some important details below.
 
 ### Installation parameters
 
@@ -187,9 +169,7 @@ To run RSpec unit tests: `bundle exec rake spec`
 
 To run RSpec unit tests, puppet-lint, syntax checks and metadata lint: `bundle exec rake test`
 
-To run Beaker acceptance tests: `BEAKER_set=<nodeset name> BEAKER_PUPPET_COLLECTION=puppet5 bundle exec rake acceptance`
-where `<nodeset name>` is one of the filenames in `spec/acceptance/nodesets` without the trailing `.yml`,
-e.g. `ubuntu-18.04-x86_64-docker`.
+To run Beaker acceptance tests: `BEAKER_set=<nodeset name> bundle exec rake acceptance` where `<nodeset name>` is one of the filenames in `spec/acceptance/nodesets` without the trailing `.yml`, e.g. `ubuntu-20.04-x86_64-docker`.
 
 ## Related Projects
 
