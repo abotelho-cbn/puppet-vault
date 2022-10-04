@@ -2,29 +2,30 @@
 #   It sets variables according to platform.
 #
 class vault::params {
-  $user               = 'vault'
-  $manage_user        = true
-  $group              = 'vault'
-  $manage_group       = true
-  $config_dir         = '/etc/vault'
-  $config_mode        = '0750'
-  $manage_config_file = true
-  $download_url       = undef
-  $download_url_base  = 'https://releases.hashicorp.com/vault/'
-  $download_extension = 'zip'
-  $version            = '1.4.2'
-  $service_name       = 'vault'
-  $num_procs          = $facts['processors']['count']
-  $package_name       = 'vault'
-  $package_ensure     = 'installed'
+  $user                = 'vault'
+  $manage_user         = true
+  $group               = 'vault'
+  $manage_group        = true
+  $config_dir          = '/etc/vault'
+  $config_mode         = '0750'
+  $manage_config_file  = true
+  $download_url        = undef
+  $download_url_base   = 'https://releases.hashicorp.com/vault/'
+  $download_extension  = 'zip'
+  $service_name        = 'vault'
+  $service_enable      = true
+  $service_ensure      = 'running'
+  $service_provider    = $facts['service_provider']
+  $service_type        = 'server'
+  $service_options     = undef
+  $manage_service      = true
 
-  $download_dir        = '/tmp'
-  $manage_download_dir = false
-  $download_filename   = 'vault.zip'
-
-  # storage and listener are mandatory, we provide some sensible
-  # defaults here
-  $storage             = { 'file' => { 'path' => '/var/lib/vault' } }
+  # storage and listener are mandatory, we provide some sensible defaults
+  $storage             = {
+    'file' => {
+      'path' => '/var/lib/vault',
+    },
+  }
   $manage_storage_dir  = false
   $listener            = {
     'tcp' => {
@@ -33,7 +34,14 @@ class vault::params {
     },
   }
 
-  $enable_ui          = undef
+  $num_procs           = $facts['processors']['count']
+  $package_name        = 'vault'
+  $package_ensure      = 'installed'
+  $download_dir        = '/tmp'
+  $manage_download_dir = false
+  $download_filename   = 'vault.zip'
+  $version             = '1.4.2'
+  $enable_ui           = undef
 
   # These should always be undef as they are optional settings that
   # should not be configured unless explicitly declared.
@@ -46,15 +54,6 @@ class vault::params {
   $disable_mlock      = undef
 
   $manage_file_capabilities = undef
-
-  $manage_service = true
-
-  $service_enable = true
-  $service_ensure = 'running'
-
-  $service_provider = $facts['service_provider']
-
-  $service_type = 'server'
 
   case $facts['os']['architecture'] {
     'aarch64':        { $arch = 'arm64' }
