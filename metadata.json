@@ -1,5 +1,5 @@
 {
-  "name": "jeffbyrnes-vault",
+  "name": "athenahealth-vault",
   "version": "0.1.0",
   "author": "athenahealth",
   "summary": "Puppet module to manage Vault (https://vaultproject.io)",
