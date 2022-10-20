@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## Unreleased
+
+- Fork module to new maintainer, athenahealth
+- Update to PDK v2.5.0 standards
+- Apply rubocop & puppet-lint autofixes
+- Add class parameter typecasting
+- Add Puppet Strings documentation
+- Update dependencies for Puppet 7 compatibility:
+    * Switch to `puppet/systemd`
+    * Allow `puppet/systemd` up to v3.x
+    * Allow `puppetlabs/stdlib` up to v8.x
+    * Allow `puppet/archive` up to v6.x
+    * Allow `puppet/hashi_stack` up to v2.x
+    * Allow `stm/file_capability` up to v5.x
+- Update supported Linux distributions & versions
+- Automate testing of module using PDK + GitHub Actions
+- Fix `$manage_file_capabilities` when `$package_name != 'vault'`
+- Restart `Service[vault]` on changes to `File[${vault::config_dir}/config.json]`
+- Add upgrading of “archive” style installation
+
 ## 2020-05-27 v2.3.0
 
 - Add `manage_config_file` option
