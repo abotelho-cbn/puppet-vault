@@ -1,7 +1,9 @@
 name: Build and publish to Puppet Forge
 
 on:
-  - push
+  push:
+    branches:
+      - main
 
 jobs:
   test:
