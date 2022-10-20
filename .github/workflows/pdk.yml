@@ -1,7 +1,6 @@
 name: PDK validate & test unit
 
 on:
-  - push
   - pull_request
 
 jobs:
