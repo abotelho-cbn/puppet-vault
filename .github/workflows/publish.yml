@@ -1,0 +1,23 @@
+name: Build and publish to Puppet Forge
+
+on:
+  - push
+
+jobs:
+  test:
+    uses: ./.github/workflows/pdk.yml
+
+  publish:
+    # README: Only publish git tags that start with "v", e.g., "v3.0.0"
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest tag
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF:10}
+
+      - name: Build and publish module
+        uses: barnumbirr/action-forge-publish@v2.9.2
+        env:
+          FORGE_API_KEY: ${{ secrets.FORGE_API_KEY }}
+          REPOSITORY_URL: https://forgeapi.puppet.com/v3/releases
