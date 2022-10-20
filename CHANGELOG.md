@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 2022-10-20 v3.0.0
 
 - Fork module to new maintainer, athenahealth
 - Update to PDK v2.5.0 standards

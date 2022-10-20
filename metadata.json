@@ -1,6 +1,6 @@
 {
   "name": "athenahealth-vault",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "author": "athenahealth",
   "summary": "Puppet module to manage Vault (https://vaultproject.io)",
   "license": "Apache-2.0",
