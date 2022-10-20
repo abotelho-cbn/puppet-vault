@@ -293,6 +293,16 @@ describe 'vault' do
 
             it { is_expected.to contain_file_capability('vault_binary_capability') }
             it { is_expected.to contain_package('vault').that_notifies(['File_capability[vault_binary_capability]']) }
+
+            context 'when the package name is not "vault"' do
+              let(:params) do
+                super().merge(
+                  package_name: 'custom',
+                )
+              end
+
+              it { is_expected.to contain_package('custom') }
+            end
           end
         end
       end
