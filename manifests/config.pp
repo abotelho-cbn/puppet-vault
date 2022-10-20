@@ -10,7 +10,7 @@ class vault::config {
   }
 
   if $vault::manage_config_file {
-    $_config_hash = delete_undef_values( {
+    $_config_hash = delete_undef_values({
         'listener'          => $vault::listener,
         'storage'           => $vault::storage,
         'ha_storage'        => $vault::ha_storage,
