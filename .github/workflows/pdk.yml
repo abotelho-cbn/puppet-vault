@@ -1,8 +1,8 @@
 name: PDK validate & test unit
 
 on:
-  - push
   - pull_request
+  - workflow_call
 
 jobs:
   tests:
