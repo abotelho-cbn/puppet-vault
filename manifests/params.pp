@@ -77,5 +77,5 @@ class vault::params {
       $manage_repo         = true
     }
   }
-  $os = downcase($facts['kernel'])
+  $os_type = downcase($facts['kernel'])
 }

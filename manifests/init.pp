@@ -139,8 +139,8 @@
 # @param version
 #   The version of Vault to install
 #
-# @param os
-#   Override the `$facts['kernel']` supplied OS value
+# @param os_type
+#   Override the `$facts['kernel']` supplied OS value (e.g., 'Linux')
 #
 # @param arch
 #   Override the `$facts['os']['architecture']` supplied architecture value
@@ -199,14 +199,14 @@ class vault (
   Boolean  $manage_download_dir               = $vault::params::manage_download_dir,
   String   $download_filename                 = $vault::params::download_filename,
   String   $version                           = $vault::params::version,
-  String   $os                                = $vault::params::os,
+  String   $os_type                           = $vault::params::os_type,
   String   $arch                              = $vault::params::arch,
   Optional[Boolean] $enable_ui                = $vault::params::enable_ui,
   Optional[String] $api_addr                  = undef,
   Hash     $extra_config                      = {},
 ) inherits vault::params {
   # lint:ignore:140chars
-  $real_download_url = pick($download_url, "${download_url_base}${version}/${package_name}_${version}_${os}_${arch}.${download_extension}")
+  $real_download_url = pick($download_url, "${download_url_base}${version}/${package_name}_${version}_${os_type}_${arch}.${download_extension}")
   # lint:endignore
 
   contain vault::install
