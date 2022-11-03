@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2022-11-03 v3.0.1
+
+- Add AlmaLinux 8 as a supported OS (h/t @abotelho-cbn)
+- Avoid collision with built-in variable (#6 h/t @abotelho-cbn)
+
 ## 2022-10-20 v3.0.0
 
 - Fork module to new maintainer, athenahealth

@@ -79,7 +79,7 @@ The following parameters are available in the `vault` class:
 * [`manage_download_dir`](#manage_download_dir)
 * [`download_filename`](#download_filename)
 * [`version`](#version)
-* [`os`](#os)
+* [`os_type`](#os_type)
 * [`arch`](#arch)
 * [`enable_ui`](#enable_ui)
 * [`api_addr`](#api_addr)
@@ -236,7 +236,7 @@ Default value: `$vault::params::service_options`
 
 Data type: `Boolean`
 
-Configure the upstream HashiCorp repository. Only relevant when $nomad::install_method = 'repo'.
+Configure the upstream HashiCorp repository. Only relevant when $vault::install_method = 'repo'.
 
 Default value: `$vault::params::manage_repo`
 
@@ -350,11 +350,11 @@ Default value: `$vault::params::manage_file_capabilities`
 
 Data type: `Integer`
 
-Sets the GOMAXPROCS environment variable, to determine how many CPUs Vault
+Sets the `GOMAXPROCS` environment variable, to determine how many CPUs Vault
 can use. The official Vault Terraform install.sh script sets this to the
-output of ``nprocs``, with the comment, "Make sure to use all our CPUs,
+output of `nprocs`, with the comment, "Make sure to use all our CPUs,
 because Vault can block a scheduler thread". Default: number of CPUs
-on the system, retrieved from the ``processorcount`` Fact.
+on the system.
 
 Default value: `$vault::params::num_procs`
 
@@ -416,13 +416,13 @@ The version of Vault to install
 
 Default value: `$vault::params::version`
 
-##### <a name="os"></a>`os`
+##### <a name="os_type"></a>`os_type`
 
 Data type: `String`
 
-Override the `$facts['kernel']` supplied OS value
+Override the `$facts['kernel']` supplied OS value (e.g., 'Linux')
 
-Default value: `$vault::params::os`
+Default value: `$vault::params::os_type`
 
 ##### <a name="arch"></a>`arch`
 
