@@ -158,6 +158,8 @@
 # @param extra_config
 #   Hash representation of any additional Vault configuration not already represented
 #
+# @param vault_template_header
+#   String for text placed in the header of template files
 class vault (
   String   $user                              = $vault::params::user,
   Boolean  $manage_user                       = $vault::params::manage_user,
@@ -201,6 +203,7 @@ class vault (
   String   $version                           = $vault::params::version,
   String   $os_type                           = $vault::params::os_type,
   String   $arch                              = $vault::params::arch,
+  String   $vault_template_header             = $vault::params::vault_template_header,
   Optional[Boolean] $enable_ui                = $vault::params::enable_ui,
   Optional[String] $api_addr                  = undef,
   Hash     $extra_config                      = {},

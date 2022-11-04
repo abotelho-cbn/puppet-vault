@@ -78,4 +78,6 @@ class vault::params {
     }
   }
   $os_type = downcase($facts['kernel'])
+
+  $vault_template_header = "This file is managed by the ${module_name} module. Modifications will be lost."
 }
